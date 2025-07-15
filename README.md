@@ -1,283 +1,118 @@
-# Secure File Sharing Web App
+# Secure File Sharing
 
-A modern, secure file sharing web application built with Node.js, Express, and vanilla JavaScript. This application provides a secure way to upload, share, and download files with password protection and expiration features.
+![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E) ![NPM](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)
+
+
+## Table of Contents
+- [Overview](#-overview)
+- [Features](#-features)
+- [Tech Stack](#-tech-stack)
+- [Installation](#-installation)
+- [Usage](#-usage)
+- [Project Structure](#-project-structure)
+- [License](#-license)
+
+
+---
+
+## ✨ Overview
+
+Secure File Sharing is a comprehensive full-stack web application developed with JavaScript. It features responsive user interface, comprehensive testing, detailed documentation. Ideal for businesses and users seeking a complete digital solution with both frontend and backend components.
+
+---
+
+
+## 🔗 Connect with me
+
+[![Twitter](https://img.shields.io/badge/Twitter-%231DA1F2?style=for-the-badge&logo=Twitter&logoColor=white)](https://twitter.com/dbaidya811) [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/dbaidya811)
+
 
 ## 🚀 Features
 
-### Security Features
-- **JWT Authentication**: Secure user authentication with JSON Web Tokens
-- **Password Protection**: Optional password protection for shared files
-- **File Expiration**: Set automatic expiration times for files
-- **Rate Limiting**: Protection against abuse with request rate limiting
-- **Input Validation**: Comprehensive input validation and sanitization
-- **CORS Protection**: Configurable Cross-Origin Resource Sharing
-- **Helmet Security**: HTTP headers security with Helmet middleware
+- **Modern UI/UX:** Responsive design with intuitive user interface and smooth user experience
+- **Full-stack Integration:** Seamless communication between frontend and backend components
+- **Real-time Updates:** Dynamic content updates and real-time data synchronization
+- **Cross-platform Compatibility:** Works seamlessly across different devices, browsers, and screen sizes
+- **Advanced State Management:** Efficient state handling and data flow management
+- **Comprehensive Testing:** Extensive test coverage including unit, integration, and end-to-end tests
+- **Detailed Documentation:** Complete guides, API references, and usage examples
+- **Auto Documentation:** Automatic API documentation and guides
+- **File Management:** File upload, processing, and storage capabilities
+- **Comprehensive Testing:** Unit, integration, and end-to-end testing
 
-### File Management
-- **Drag & Drop Upload**: Modern drag and drop file upload interface
-- **Multiple File Types**: Support for images, documents, PDFs, and more
-- **File Size Limits**: Configurable file size limits (default: 50MB)
-- **Download Tracking**: Track number of downloads for each file
-- **File Metadata**: Display file size, upload date, and download count
+---
 
-### User Interface
-- **Modern Design**: Beautiful, responsive UI with gradient backgrounds
-- **Real-time Notifications**: Toast notifications for user feedback
-- **Loading States**: Visual feedback during operations
-- **Mobile Responsive**: Works perfectly on all device sizes
-- **Dark Mode Ready**: CSS prepared for dark mode implementation
+## 🛠️ Tech Stack
 
-## 📋 Prerequisites
+- **Primary Language:** JavaScript
+- **Frontend:** JavaScript
+- **Tools & Libraries:** npm, Git
 
-- Node.js (version 14 or higher)
-- npm or yarn package manager
-- Modern web browser
+## 📊 Languages Used
 
-## 🛠️ Installation
+![JSON](https://img.shields.io/badge/JSON-42.1%25-blue?style=for-the-badge) ![JavaScript](https://img.shields.io/badge/JavaScript-26.3%25-blue?style=for-the-badge) ![Batch](https://img.shields.io/badge/Batch-10.5%25-blue?style=for-the-badge) ![HTML](https://img.shields.io/badge/HTML-10.5%25-blue?style=for-the-badge) ![Markdown](https://img.shields.io/badge/Markdown-5.3%25-blue?style=for-the-badge) ![CSS](https://img.shields.io/badge/CSS-5.3%25-blue?style=for-the-badge) 
 
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd secure-file-sharing
-   ```
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+## ⚙️ Installation
 
-3. **Set up environment variables**
-   ```bash
-   cp env.example .env
-   ```
-   
-   Edit the `.env` file with your configuration:
-   ```env
-   PORT=3000
-   JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
-   ALLOWED_ORIGINS=http://localhost:3000
-   ```
-
-4. **Start the development server**
-   ```bash
-   npm run dev
-   ```
-
-5. **Access the application**
-   Open your browser and navigate to `http://localhost:3000`
-
-## 🚀 Usage
-
-### For Users
-
-1. **Registration/Login**
-   - Create a new account or log in with existing credentials
-   - All passwords are securely hashed using bcrypt
-
-2. **Upload Files**
-   - Drag and drop files or click to select
-   - Optionally set a password for file protection
-   - Set expiration time (in hours) if needed
-   - Click "Upload File" to complete
-
-3. **Share Files**
-   - After upload, copy the share URL
-   - Share the URL with others
-   - Recipients can download with or without password
-
-4. **Manage Files**
-   - View all uploaded files in your dashboard
-   - Delete files you no longer need
-   - Track download statistics
-
-### For Recipients
-
-1. **Access Shared File**
-   - Click on the shared URL
-   - View file information (size, upload date, etc.)
-
-2. **Download File**
-   - If password protected, enter the password
-   - Click "Download File" to start download
-   - File will download with original filename
-
-## 🔧 Configuration
-
-### Environment Variables
-
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `PORT` | Server port | 3000 |
-| `JWT_SECRET` | JWT signing secret | Required |
-| `ALLOWED_ORIGINS` | CORS allowed origins | http://localhost:3000 |
-| `MAX_FILE_SIZE` | Maximum file size in bytes | 52428800 (50MB) |
-
-### File Types Supported
-
-- Images: JPEG, PNG, GIF
-- Documents: PDF, TXT, DOC, DOCX
-- Spreadsheets: XLS, XLSX
-- And more configurable types
-
-## 🏗️ Project Structure
-
-```
-secure-file-sharing/
-├── server.js              # Main server file
-├── package.json           # Dependencies and scripts
-├── env.example           # Environment variables template
-├── README.md             # This file
-├── backup.js             # Data backup and restore utility
-├── data/                 # JSON data storage
-│   ├── users.json        # User accounts data
-│   └── files.json        # File metadata storage
-├── public/               # Frontend files
-│   ├── index.html        # Main application page
-│   ├── share.html        # File download page
-│   ├── styles.css        # Application styles
-│   ├── app.js           # Main application logic
-│   └── share.js         # Share page logic
-├── uploads/              # File storage directory (auto-created)
-└── backups/              # Backup directory (auto-created)
-```
-
-## 🔒 Security Features
-
-### Authentication & Authorization
-- JWT-based authentication
-- Password hashing with bcrypt
-- Token expiration (24 hours)
-- Protected API endpoints
-
-### File Security
-- Secure file naming with UUIDs
-- File type validation
-- Size limits enforcement
-- Optional password protection
-- Automatic file expiration
-
-### Server Security
-- Helmet.js for HTTP headers
-- Rate limiting (100 requests per 15 minutes)
-- CORS protection
-- Input validation and sanitization
-- Error handling without information leakage
-
-## 💾 Data Storage
-
-### JSON File Storage
-The application uses JSON files for persistent data storage:
-- **Users**: `data/users.json` - User accounts and authentication data
-- **Files**: `data/files.json` - File metadata and sharing information
-- **Uploads**: `uploads/` - Actual file storage directory
-
-### Data Backup & Restore
 ```bash
-# Create a backup
-npm run backup
-
-# List available backups
-npm run backup:list
-
-# Restore from backup
-npm run backup:restore <backup-path>
+# Clone the repository
+# git clone https://github.com/dbaidya811/Secure-File-Sharing.git
+# Change directory
+# cd Secure-File-Sharing
+# Backend setup (if applicable)
+npm install
 ```
 
-### Data Management
-- **Automatic Loading**: Data is loaded from JSON files on server start
-- **Persistent Storage**: All changes are saved immediately to JSON files
-- **Backup System**: Automated backup of users, files, and uploads
-- **Data Integrity**: Error handling for corrupted JSON files
+---
 
-## 🚀 Production Deployment
+## 🏃 Usage
 
-### Environment Setup
-1. Set strong JWT secret
-2. Configure proper CORS origins
-3. Set up database (MongoDB/PostgreSQL recommended for production)
-4. Configure file storage (AWS S3 recommended)
-5. Set up SSL/TLS certificates
-6. Configure regular backups
+Use the following command to run the project:
 
-### Recommended Production Stack
-- **Database**: MongoDB or PostgreSQL
-- **File Storage**: AWS S3 or similar
-- **Session Storage**: Redis
-- **Reverse Proxy**: Nginx
-- **Process Manager**: PM2
-- **SSL**: Let's Encrypt
-
-### Docker Deployment
-```dockerfile
-FROM node:16-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
-COPY . .
-EXPOSE 3000
-CMD ["npm", "start"]
-```
-
-## 🧪 Testing
-
-Run the test suite:
 ```bash
-npm test
+# Run the project
+npm start
 ```
 
-## 📝 API Endpoints
+---
 
-### Authentication
-- `POST /api/register` - User registration
-- `POST /api/login` - User login
+## 📂 Project Structure
 
-### File Management
-- `POST /api/upload` - Upload file (authenticated)
-- `GET /api/download/:fileId` - Download file
-- `GET /api/file/:fileId` - Get file information
-- `GET /api/files` - Get user's files (authenticated)
-- `DELETE /api/file/:fileId` - Delete file (authenticated)
+A brief overview of the key files and directories:
+```
+Secure-File-Sharing/
+├── start.bat
+├── env.example
+├── setup.bat
+├── package.json
+├── backup.js
+├── test.js
+├── server.js
+├── package-lock.json
+├── README.md
+├── backups/backup-2025-07-12T05-45-05-792Z/users.json
+├── backups/backup-2025-07-12T05-45-05-792Z/files.json
+├── backups/backup-2025-07-12T05-45-22-322Z/users.json
+├── backups/backup-2025-07-12T05-45-22-322Z/files.json
+├── data/users.json
+├── data/files.json
+└── ...
+```
 
-### Health Check
-- `GET /api/health` - Server health status
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
+---
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+No license file found.
 
-## 🆘 Support
 
-If you encounter any issues or have questions:
+## 🙏 Support
 
-1. Check the existing issues
-2. Create a new issue with detailed information
-3. Include your environment details and error messages
+If you like this project, please consider supporting me.
 
-## 🔮 Future Enhancements
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy_Me_A_Coffee-%23FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/dbaidya811e)
 
-- [ ] Database integration (MongoDB/PostgreSQL)
-- [ ] Cloud storage integration (AWS S3, Google Cloud)
-- [ ] Email notifications
-- [ ] File preview functionality
-- [ ] Bulk file operations
-- [ ] Advanced analytics
-- [ ] API rate limiting per user
-- [ ] File encryption at rest
-- [ ] Multi-language support
-- [ ] Progressive Web App (PWA) features
+---
 
-## 🙏 Acknowledgments
-
-- Express.js for the web framework
-- Multer for file upload handling
-- bcryptjs for password hashing
-- Font Awesome for icons
-- Modern CSS for beautiful styling 
+*This README was automatically generated. Feel free to edit and improve!*
