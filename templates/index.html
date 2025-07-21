@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>File Share with QR Code</title>
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/9153/9153957.png">
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f4f6fb;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            background: #fff;
+            max-width: 420px;
+            margin: 40px auto;
+            padding: 32px 28px 24px 28px;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08), 0 1.5px 4px rgba(0,0,0,0.04);
+        }
+        h2 {
+            text-align: center;
+            color: #2d3a4a;
+            margin-bottom: 24px;
+        }
+        form {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            margin-bottom: 18px;
+            align-items: center;
+            justify-content: center;
+        }
+        .file-input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+        input[type="file"] {
+            width: 100%;
+            padding: 8px 0;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 6px 0 0 6px;
+            background: #f9fafb;
+            color: #374151;
+            font-size: 1rem;
+            outline: none;
+        }
+        .upload-btn {
+            background: #3b82f6;
+            color: #fff;
+            border: none;
+            border-radius: 0 6px 6px 0;
+            padding: 10px 18px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .upload-btn:hover {
+            background: #2563eb;
+        }
+        .link {
+            background: #f1f5fa;
+            border-radius: 8px;
+            padding: 12px 12px;
+            margin-top: 16px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            word-break: break-all;
+            flex-direction: row;
+            justify-content: flex-start;
+        }
+        .link-label {
+            font-weight: 600;
+            color: #374151;
+            font-size: 1rem;
+            margin-right: 8px;
+            white-space: nowrap;
+        }
+        .link a {
+            color: #2563eb;
+            text-decoration: underline;
+            font-weight: 500;
+            max-width: 170px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .copy-btn {
+            background: #10b981;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 7px 13px;
+            font-size: 0.97rem;
+            cursor: pointer;
+            margin-left: 8px;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            height: 32px;
+        }
+        .copy-btn:hover {
+            background: #059669;
+        }
+        .qr {
+            background: #f1f5fa;
+            border-radius: 8px;
+            padding: 14px 12px;
+            margin-top: 16px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 6px;
+        }
+        .qr img {
+            margin: 10px 0 6px 0;
+            border-radius: 8px;
+            border: 1.5px solid #e5e7eb;
+            background: #fff;
+        }
+        .qr button {
+            margin-left: 0;
+        }
+        .qr-btn {
+            background: #3b82f6;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 16px;
+            font-size: 0.97rem;
+            cursor: pointer;
+            margin-top: 4px;
+            transition: background 0.2s;
+            display: inline-block;
+        }
+        .qr-btn:hover {
+            background: #2563eb;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 16px 4vw 12px 4vw;
+            }
+            h2 {
+                font-size: 1.2rem;
+            }
+            form {
+                flex-direction: column;
+                gap: 8px;
+            }
+            input[type="file"] {
+                font-size: 0.98rem;
+            }
+            .upload-btn, .copy-btn {
+                font-size: 0.96rem;
+                padding: 9px 12px;
+            }
+            .link a {
+                max-width: 90vw;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>File Share with QR Code</h2>
+    <form method="post" enctype="multipart/form-data">
+        <div class="file-input-wrapper">
+            <input type="file" name="file" required>
+        </div>
+        <button class="upload-btn" type="submit">Upload & Generate QR</button>
+    </form>
+    {% if download_url %}
+        <div class="link">
+            <span class="link-label">Download Link:</span>
+            <a id="downloadLink" href="{{ download_url }}" target="_blank" title="{{ download_url }}">{{ download_url }}</a>
+            <button class="copy-btn" onclick="copyLink()">Copy Link</button>
+        </div>
+    {% endif %}
+    {% if qr_image %}
+        <div class="qr">
+            <strong>QR Code:</strong><br>
+            <img id="qrImg" src="{{ url_for('qr_image', qr_image=qr_image) }}" alt="QR Code" style="max-width:200px;">
+            <br>
+            <button class="qr-btn" onclick="downloadQR()">Download QR</button>
+        </div>
+    {% endif %}
+</div>
+<script>
+function copyLink() {
+    const link = document.getElementById('downloadLink').href;
+    navigator.clipboard.writeText(link).then(function() {
+        alert('Link copied to clipboard!');
+    }, function(err) {
+        alert('Could not copy link: ' + err);
+    });
+}
+function downloadQR() {
+    const img = document.getElementById('qrImg');
+    const url = img.src;
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'qr_code.png';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
+</script>
+</body>
+</html> 
